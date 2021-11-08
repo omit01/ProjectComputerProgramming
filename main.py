@@ -1,13 +1,10 @@
 def arrival_service_uniform(N, Arrival, Service):
-    arrivalTime = []
-    serviceTime = []
-    for x in range(N):
-        arrivalTime.append(1 / Arrival)
-        serviceTime.append(1 / Service)
-    restult = (arrivalTime, serviceTime)
-    return restult
+    data = [1]*N
+    arrival_time = [1/Arrival for n in data]
+    service_time = [1/Service for n in data]
+    result = (arrival_time, service_time)
+    return result
 
-print(arrival_service_uniform(3, 4, 2))
 
 def calculate_arrival_service_per_C(arrivalrates, servicerates):
     lastArrival = 0
@@ -31,6 +28,7 @@ def calculate_arrival_service_per_C(arrivalrates, servicerates):
         service_finish.append(lastServiceEnd)
     return (arrivalTimes, service_start, service_finish)
 
+
 def arrival_service_exponential(N, Arrival, Service):
     import numpy as np
     np.random.seed(1)
@@ -42,7 +40,6 @@ def arrival_service_exponential(N, Arrival, Service):
     restult = (arrivalTime, serviceTime)
     return restult
 
-print(arrival_service_exponential(2, 4, 2))
 
 def Total_system_time(arrivaltimes, service_finish):
     waiting_time = []
@@ -50,3 +47,32 @@ def Total_system_time(arrivaltimes, service_finish):
         waiting_time.append(service_finish[x] - arrivaltimes[x])
     return (waiting_time, sum(waiting_time))
 
+
+def Total_queue_time(arrivaltimes, service_start):
+    queue_time = []
+    for n in range(len(arrivaltimes)):
+        print(n)
+        queue_time.append(service_start[n] - arrivaltimes[n])
+    return queue_time, sum(queue_time)
+
+
+def Total_system_time_CSV(file):
+    from pandas import pandas as pd
+    """Still some work to do..."""
+    pass
+
+
+def Queue_length_someone_joins(arrivaltimes, service_finish):
+    result = []
+    for n in range(len(arrivaltimes)):
+        result.append(n - sum(f < arrivaltimes[n] for f in service_finish))
+    return result
+
+
+def Queueremains (queuelength, C, Q):
+    return Q * sum(n > Q for n in queuelength)
+
+
+def QueueLeaves(arrivalrates, servicerates, C, Q):
+    """Still some work to do..."""
+    pass
