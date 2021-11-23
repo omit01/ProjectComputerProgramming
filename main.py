@@ -82,7 +82,8 @@ def Queue_length_someone_joins(arrivaltimes, service_finish):
 
 
 def Queueremains (queuelength, C, Q):
-    return Q * sum(n > Q for n in queuelength)
+    bounced = sum(n > Q for n in queuelength)
+    return (bounced, "$" + str(Q * bounced))
 
 
 def QueueLeaves(arrivalrates, servicerates, C, Q):
@@ -94,7 +95,7 @@ def QueueLeaves(arrivalrates, servicerates, C, Q):
     last_finish_time = 0
 
     for n in range(len(arrivalrates)):
-        c_in_queue.append[len(queue)] #Error: Object is not subscriptable
+        c_in_queue.append(len(queue)) #Error: Object is not subscriptable
         if arrival_times[n] < last_finish_time:
             if len(queue) >= Q:
                 bounced_c += 1
