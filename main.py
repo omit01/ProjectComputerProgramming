@@ -64,9 +64,8 @@ def Total_queue_time(arrivaltimes, service_start):
 def Total_system_time_CSV(file):
     import csv
     from pandas import pandas as pd
-
-    tableDF = r"File1.csv"
-    tableDF=pd.read_csv("File1.csv", header=0)
+    
+    tableDF=pd.read_csv(file, header=0)
 
     waiting_time=[]
     for index, row in tableDF.iterrows():
