@@ -83,30 +83,28 @@ def Queue_length_someone_joins(arrivaltimes, service_finish):
 
 def Queueremains (queuelength, C, Q):
     bounced = sum(n > Q for n in queuelength)
-    return (bounced, "$" + str(Q * bounced))
+    return (bounced, "$" + str(C * bounced))
 
 
 def QueueLeaves(arrivalrates, servicerates, C, Q):
     import numpy as np
     arrival_times = np.cumsum(np.array(arrivalrates))
-    bounced_c = 0
-    queue = []
+
     c_in_queue = []
-    last_finish_time = 0
+    end_time = 0
+    start_service=0
+    queue = []
 
     for n in range(len(arrivalrates)):
-        c_in_queue.append(len(queue)) #Error: Object is not subscriptable
-        if arrival_times[n] < last_finish_time:
-            if len(queue) >= Q:
-                bounced_c += 1
-                servicerates[n] = 0
-            else:
-                queue.append[n]
-        
-        while arrival_times[n] >= last_finish_time:
-            if queue.clear:
-                break
-            else:
-                removed = queue.pop(0)
-                last_finish_time += servicerates[removed]
-    return (c_in_queue, bounced_c, bounced_c * C)
+        if arrival_times[n] >= end_time:
+            start_service = arrival_times[n]
+        else:
+            queue.append(n)
+        if len(queue) > Q:
+            servicerates[n] = 0
+            queue.remove(n)
+        c_in_queue.append(len(queue))
+        end_time = start_service + servicerates[n]
+    bounced = sum(service_time == 0 for service_time in servicerates)
+
+    return (c_in_queue, bounced, str("$" + str(bounced * C)))
