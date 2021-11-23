@@ -57,7 +57,6 @@ def Total_system_time(arrivaltimes, service_finish):
 def Total_queue_time(arrivaltimes, service_start):
     queue_time = []
     for n in range(len(arrivaltimes)):
-        print(n)
         queue_time.append(service_start[n] - arrivaltimes[n])
     return queue_time, sum(queue_time)
 
