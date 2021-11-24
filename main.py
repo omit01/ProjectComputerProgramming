@@ -43,8 +43,8 @@ def arrival_service_exponential(N, Arrival, Service):
     for x in range(N):
         arrival_time.append(np.random.exponential(1 / Arrival))
         service_time.append(np.random.exponential(1 / Service))
-    restult = (arrival_time, service_time)
-    return restult
+    result = (arrival_time, service_time)
+    return result
 
 
 def Total_system_time(arrivaltimes, service_finish):
