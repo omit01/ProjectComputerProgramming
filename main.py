@@ -7,7 +7,6 @@
 def arrival_service_uniform(N, Arrival, Service):
     return ([1/Arrival for n in [1]*N], [1/Service for n in [1]*N])
 
-#print(str(arrival_service_uniform(3, 4, 2)) == str(([0.25, 0.25, 0.25], [0.5, 0.5, 0.5]))) # if true 1 points 
 
 def calculate_arrival_service_per_C(arrivalrates, servicerates):
     last_arrival = 0
@@ -31,7 +30,6 @@ def calculate_arrival_service_per_C(arrivalrates, servicerates):
         service_finish.append(last_service_end)
     return (arrival_times, service_start, service_finish)
 
-#print(str(calculate_arrival_service_per_C([0.25, 0.25, 0.25], [0.5, 0.5, 0.5]))==str(([0.25, 0.5, 0.75], [0.25, 0.75, 1.25], [0.75, 1.25, 1.75]))) # 3 points if true
 
 def arrival_service_exponential(N, Arrival, Service):
     import numpy as np
@@ -43,7 +41,6 @@ def arrival_service_exponential(N, Arrival, Service):
         service_time.append(np.random.exponential(1 / Service))
     return (arrival_time, service_time)
 
-#print(str(arrival_service_exponential(2, 4, 2)) == str(([0.13490145931479636, 2.859533966077148e-05], [0.6370626265066521, 0.1800063774269595]))) #1 points if true 
 
 def Total_system_time(arrivaltimes, service_finish):
     waiting_time = []
@@ -51,7 +48,6 @@ def Total_system_time(arrivaltimes, service_finish):
         waiting_time.append(service_finish[x] - arrivaltimes[x])
     return (waiting_time, sum(waiting_time))
 
-#print(str(Total_system_time([0.25, 0.33, 0.59], [0.49, 0.53, 1.25]))==str(([0.24, 0.2, 0.66], 1.1))) # if true 1 point
 
 def Total_queue_time(arrivaltimes, service_start):
     queue_time = []
@@ -59,7 +55,6 @@ def Total_queue_time(arrivaltimes, service_start):
         queue_time.append(service_start[n] - arrivaltimes[n])
     return (queue_time, sum(queue_time))
 
-#print(str(Total_queue_time([0.25, 0.5, 0.75, 1.0, 1.25], [0.25, 0.5833333333333333, 0.9166666666666665, 1.2499999999999998, 1.583333333333333]))==str(([0.0, 0.08333333333333326, 0.16666666666666652, 0.24999999999999978, 0.33333333333333304], 0.8333333333333326))) # if true 1 point
 
 def Total_system_time_CSV(file):
     import csv
@@ -72,7 +67,6 @@ def Total_system_time_CSV(file):
         waiting_time.append(row[1] - row[0])
     return(waiting_time, sum(waiting_time))
     
-#print(str(Total_system_time_CSV("File.csv")) == str(([0.04999999999999999, 0.08330000000000004, 0.16659999999999997, 0.09600000000000009, 0.33329999999999993], 0.7292000000000001))) # 5 points if true
 
 def Queue_length_someone_joins(arrivaltimes, service_finish):
     result = []
@@ -80,13 +74,11 @@ def Queue_length_someone_joins(arrivaltimes, service_finish):
         result.append(n - sum(f < arrivaltimes[n] for f in service_finish))
     return result
 
-#print(str(Queue_length_someone_joins([0.25, 0.34, 0.39, 0.51, 0.59, 0.77], [0.31, 0.41, 1.2, 1.5, 1.6, 1.9]))==str([0, 0, 1, 1, 2, 3])) # if true 5 points
 
 def Queueremains (queuelength, C, Q):
     bounced = sum(n > Q for n in queuelength)
     return (bounced, "$" + str(C * bounced))
 
-#print(str(Queueremains([0, 1, 2, 3, 1, 1],50, 2))==str((1, '$50'))) # 3 points if true
 
 def QueueLeaves(arrivalrates, servicerates, C, Q):
     import numpy as np
@@ -110,5 +102,3 @@ def QueueLeaves(arrivalrates, servicerates, C, Q):
     bounced = sum(service_time == 0 for service_time in servicerates)
 
     return (c_in_queue, bounced, str("$" + str(bounced * C)))
-
-#print(str(QueueLeaves([0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25], [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], 50, 2)) == str(([0, 1, 1, 2, 2, 2, 2], 1, '$50'))) # 5 points if true
